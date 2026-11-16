@@ -59,7 +59,7 @@ export function MiniCalendar() {
           </button>
         </div>
       </div>
-      <div className="mt-3 grid grid-cols-7 text-center text-[11px] font-semibold text-slate-500" aria-hidden>
+      <div className="mt-3 grid grid-cols-7 text-center text-[11px] font-semibold text-neutral-500" aria-hidden>
         {WEEKDAYS.map((w, i) => (
           <span key={i} className="py-1">
             {w}
@@ -81,31 +81,31 @@ export function MiniCalendar() {
               onClick={() => setSelected(d)}
               className={cn(
                 "relative mx-auto grid size-9 place-items-center rounded-xl text-[13px] font-semibold transition",
-                !inMonth && "text-slate-600",
-                inMonth && !isSel && "text-slate-200 hover:bg-white/[0.07]",
-                isToday && !isSel && "ring-1 ring-cyan-300/60",
-                isSel && "bg-gradient-to-br from-electric-500 to-violet-600 text-white shadow-[0_6px_18px_-6px_rgba(110,90,255,0.9)]",
+                !inMonth && "text-neutral-600",
+                inMonth && !isSel && "text-neutral-200 hover:bg-white/[0.07]",
+                isToday && !isSel && "ring-1 ring-brand-300/60",
+                isSel && "bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-[0_6px_18px_-6px_rgba(217,119,87,0.7)]",
               )}
             >
               {Number(d.slice(8, 10))}
               {count > 0 && (
-                <span className={cn("absolute bottom-1 size-1 rounded-full", isSel ? "bg-white" : "bg-cyan-300")} aria-hidden />
+                <span className={cn("absolute bottom-1 size-1 rounded-full", isSel ? "bg-white" : "bg-brand-300")} aria-hidden />
               )}
             </button>
           );
         })}
       </div>
       <div className="mt-4 border-t border-white/[0.06] pt-3">
-        <p className="text-xs font-semibold text-slate-400 first-letter:uppercase">{formatLong(selected)}</p>
+        <p className="text-xs font-semibold text-neutral-400 first-letter:uppercase">{formatLong(selected)}</p>
         {selectedTasks.length === 0 ? (
-          <p className="mt-2 text-sm text-slate-400">Nenhum prazo neste dia.</p>
+          <p className="mt-2 text-sm text-neutral-400">Nenhum prazo neste dia.</p>
         ) : (
           <ul className="mt-2 space-y-1">
             {selectedTasks.map((t) => (
               <li key={t.id}>
                 <button onClick={() => openTask(t.id)} className="flex w-full items-center gap-2.5 rounded-xl px-2 py-1.5 text-left text-sm hover:bg-white/[0.06]">
                   <span className={cn("size-2 shrink-0 rounded-full", isDone(state, t) ? "bg-emerald-400" : priorityStyle[t.priority].dot)} aria-hidden />
-                  <span className={cn("truncate", isDone(state, t) ? "text-slate-400 line-through" : "text-slate-100")}>{t.title}</span>
+                  <span className={cn("truncate", isDone(state, t) ? "text-neutral-400 line-through" : "text-neutral-100")}>{t.title}</span>
                 </button>
               </li>
             ))}

@@ -64,17 +64,17 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                   "mt-0.5 size-5 shrink-0",
                   t.kind === "success" && "text-emerald-300",
                   t.kind === "error" && "text-rose-300",
-                  t.kind === "info" && "text-cyan-300",
+                  t.kind === "info" && "text-brand-300",
                 )}
                 aria-hidden
               />
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold text-white">{t.title}</p>
-                {t.description && <p className="mt-0.5 text-[13px] text-slate-300">{t.description}</p>}
+                {t.description && <p className="mt-0.5 text-[13px] text-neutral-300">{t.description}</p>}
               </div>
               {t.action && (
                 <button
-                  className="btn-ghost h-8 px-2.5 text-[13px] text-cyan-200"
+                  className="btn-ghost h-8 px-2.5 text-[13px] text-brand-200"
                   onClick={() => {
                     t.action!.onClick();
                     dismiss(t.id);

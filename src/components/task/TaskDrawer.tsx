@@ -72,7 +72,7 @@ function TaskDrawerInner({ task, onClose }: { task: Task; onClose: () => void })
 
   return (
     <div className="fixed inset-0 z-[65]">
-      <div className="animate-fade-in absolute inset-0 bg-[#03030f]/65 backdrop-blur-[3px]" onClick={onClose} aria-hidden />
+      <div className="animate-fade-in absolute inset-0 bg-black/65 backdrop-blur-[3px]" onClick={onClose} aria-hidden />
       <div
         ref={ref}
         role="dialog"
@@ -82,9 +82,9 @@ function TaskDrawerInner({ task, onClose }: { task: Task; onClose: () => void })
       >
         {/* cabeçalho */}
         <div className="flex items-center gap-2 border-b border-white/[0.07] px-4 py-3 sm:px-6">
-          <div className="min-w-0 flex-1 truncate text-[13px] text-slate-400">
-            <span className="text-slate-300">{board.title}</span> <span aria-hidden>/</span> {column.title}
-            {task.archived && <span className="ml-2 chip bg-slate-500/20 text-slate-200 ring-slate-400/30">Arquivada</span>}
+          <div className="min-w-0 flex-1 truncate text-[13px] text-neutral-400">
+            <span className="text-neutral-300">{board.title}</span> <span aria-hidden>/</span> {column.title}
+            {task.archived && <span className="ml-2 chip bg-neutral-500/20 text-neutral-200 ring-neutral-400/30">Arquivada</span>}
           </div>
           <button
             className={cn("btn h-9 px-3 text-[13px]", done ? "bg-emerald-500/20 text-emerald-100 ring-1 ring-emerald-400/30" : "btn-secondary h-9")}
@@ -201,7 +201,7 @@ function TaskDrawerInner({ task, onClose }: { task: Task; onClose: () => void })
                   <Trash2 className="size-4" /> Excluir
                 </button>
               </div>
-              <div className="space-y-1 border-t border-white/[0.06] pt-5 text-xs text-slate-400">
+              <div className="space-y-1 border-t border-white/[0.06] pt-5 text-xs text-neutral-400">
                 <p>Criada {relativeTime(task.createdAt)}</p>
                 {task.completedAt && done && <p>Concluída {relativeTime(task.completedAt)}</p>}
               </div>
@@ -274,7 +274,7 @@ function TitleEditor({ task }: { task: Task }) {
             (e.target as HTMLTextAreaElement).blur();
           }
         }}
-        className="font-display w-full resize-none overflow-hidden rounded-xl border border-transparent bg-transparent px-2 py-1 -mx-2 text-2xl leading-tight font-semibold text-white transition outline-none hover:border-white/10 focus:border-electric-400/60 focus:bg-white/[0.04]"
+        className="font-display w-full resize-none overflow-hidden rounded-xl border border-transparent bg-transparent px-2 py-1 -mx-2 text-2xl leading-tight font-semibold text-white transition outline-none hover:border-white/10 focus:border-brand-400/60 focus:bg-white/[0.04]"
       />
       {task.labelIds.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-1.5">
@@ -348,9 +348,9 @@ function DescriptionEditor({ task }: { task: Task }) {
           className="w-full rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4 text-left text-[15px] leading-relaxed whitespace-pre-wrap transition hover:border-white/15"
         >
           {task.description ? (
-            <span className="text-slate-200">{task.description}</span>
+            <span className="text-neutral-200">{task.description}</span>
           ) : (
-            <span className="text-slate-400">Adicionar uma descrição mais detalhada…</span>
+            <span className="text-neutral-400">Adicionar uma descrição mais detalhada…</span>
           )}
         </button>
       )}
@@ -379,12 +379,12 @@ function ChecklistSection({ task }: { task: Task }) {
   return (
     <section aria-labelledby="check-h">
       <div className="mb-3 flex items-center gap-2">
-        <ListChecks className="size-4 text-cyan-300" aria-hidden />
+        <ListChecks className="size-4 text-brand-300" aria-hidden />
         <h3 id="check-h" className="font-display text-sm font-semibold text-white">
           Checklist
         </h3>
         {total > 0 && (
-          <span className="ml-auto text-xs font-semibold text-slate-300">
+          <span className="ml-auto text-xs font-semibold text-neutral-300">
             {doneCount}/{total} · {pct}%
           </span>
         )}
@@ -426,7 +426,7 @@ function ChecklistSection({ task }: { task: Task }) {
               />
             ) : (
               <button
-                className={cn("min-w-0 flex-1 text-left text-sm", item.done ? "text-slate-400 line-through" : "text-slate-100")}
+                className={cn("min-w-0 flex-1 text-left text-sm", item.done ? "text-neutral-400 line-through" : "text-neutral-100")}
                 onClick={() => {
                   setEditingId(item.id);
                   setEditText(item.text);
@@ -504,11 +504,11 @@ function AttachmentsSection({ task }: { task: Task }) {
   return (
     <section aria-labelledby="att-h">
       <div className="mb-3 flex items-center gap-2">
-        <Paperclip className="size-4 text-violet-300" aria-hidden />
+        <Paperclip className="size-4 text-brand-300" aria-hidden />
         <h3 id="att-h" className="font-display text-sm font-semibold text-white">
           Anexos
         </h3>
-        <span className="text-xs text-slate-400">{task.attachments.length}</span>
+        <span className="text-xs text-neutral-400">{task.attachments.length}</span>
         <div className="ml-auto flex gap-1">
           <Popover
             align="end"
@@ -526,7 +526,7 @@ function AttachmentsSection({ task }: { task: Task }) {
                   {Object.entries(COVER_PRESETS).map(([key, p]) => (
                     <button
                       key={key}
-                      className="overflow-hidden rounded-xl ring-1 ring-white/10 transition hover:ring-cyan-300/60"
+                      className="overflow-hidden rounded-xl ring-1 ring-white/10 transition hover:ring-brand-300/60"
                       onClick={() => {
                         actions.addAttachment(task.id, { name: `${p.name.toLowerCase()}.png`, src: `cover:${key}`, kind: "image", size: "1.4 MB" });
                         close();
@@ -559,7 +559,7 @@ function AttachmentsSection({ task }: { task: Task }) {
       {task.attachments.length === 0 ? (
         <button
           onClick={() => fileRef.current?.click()}
-          className="flex w-full flex-col items-center gap-1 rounded-2xl border border-dashed border-white/15 py-6 text-sm text-slate-400 transition hover:border-white/30 hover:text-slate-200"
+          className="flex w-full flex-col items-center gap-1 rounded-2xl border border-dashed border-white/15 py-6 text-sm text-neutral-400 transition hover:border-white/30 hover:text-neutral-200"
         >
           <ImagePlus className="size-5" />
           Clique para enviar uma imagem (até 1,5 MB)
@@ -575,13 +575,13 @@ function AttachmentsSection({ task }: { task: Task }) {
                 )}
               </div>
               <div className="p-2.5">
-                <p className="truncate text-[13px] font-semibold text-slate-100" title={a.name}>
+                <p className="truncate text-[13px] font-semibold text-neutral-100" title={a.name}>
                   {a.name}
                 </p>
-                <p className="text-xs text-slate-400">{a.size ?? "Imagem"}</p>
+                <p className="text-xs text-neutral-400">{a.size ?? "Imagem"}</p>
                 <div className="mt-2 flex gap-1">
                   <button
-                    className="rounded-lg px-2 py-1 text-xs font-semibold text-cyan-200 hover:bg-white/[0.06]"
+                    className="rounded-lg px-2 py-1 text-xs font-semibold text-brand-200 hover:bg-white/[0.06]"
                     onClick={() => actions.setCover(task.id, task.coverId === a.id ? undefined : a.id)}
                   >
                     {task.coverId === a.id ? "Remover capa" : "Usar como capa"}
@@ -639,19 +639,19 @@ function ActivityTabs({ task }: { task: Task }) {
           role="tab"
           aria-selected={tab === "comments"}
           onClick={() => setTab("comments")}
-          className={cn("flex h-8 items-center gap-2 rounded-lg px-3 text-[13px] font-semibold transition", tab === "comments" ? "bg-white/10 text-white" : "text-slate-400 hover:text-white")}
+          className={cn("flex h-8 items-center gap-2 rounded-lg px-3 text-[13px] font-semibold transition", tab === "comments" ? "bg-white/10 text-white" : "text-neutral-400 hover:text-white")}
         >
           <MessageSquare className="size-4" /> Comentários
-          <span className="text-xs text-slate-400">{task.comments.length}</span>
+          <span className="text-xs text-neutral-400">{task.comments.length}</span>
         </button>
         <button
           role="tab"
           aria-selected={tab === "history"}
           onClick={() => setTab("history")}
-          className={cn("flex h-8 items-center gap-2 rounded-lg px-3 text-[13px] font-semibold transition", tab === "history" ? "bg-white/10 text-white" : "text-slate-400 hover:text-white")}
+          className={cn("flex h-8 items-center gap-2 rounded-lg px-3 text-[13px] font-semibold transition", tab === "history" ? "bg-white/10 text-white" : "text-neutral-400 hover:text-white")}
         >
           <History className="size-4" /> Histórico
-          <span className="text-xs text-slate-400">{task.history.length}</span>
+          <span className="text-xs text-neutral-400">{task.history.length}</span>
         </button>
       </div>
 
@@ -677,7 +677,7 @@ function ActivityTabs({ task }: { task: Task }) {
               </div>
             </div>
           </div>
-          {task.comments.length === 0 && <p className="py-4 text-center text-sm text-slate-400">Nenhum comentário ainda. Comece a conversa.</p>}
+          {task.comments.length === 0 && <p className="py-4 text-center text-sm text-neutral-400">Nenhum comentário ainda. Comece a conversa.</p>}
           <ul className="space-y-4">
             {[...task.comments].reverse().map((c) => {
               const m = state.members[c.memberId];
@@ -687,14 +687,14 @@ function ActivityTabs({ task }: { task: Task }) {
                   <div className="min-w-0 flex-1">
                     <p className="text-sm">
                       <span className="font-semibold text-white">{m?.name ?? "Membro"}</span>{" "}
-                      <span className="text-xs text-slate-400">{relativeTime(c.createdAt)}</span>
+                      <span className="text-xs text-neutral-400">{relativeTime(c.createdAt)}</span>
                     </p>
-                    <p className="mt-1 rounded-2xl rounded-tl-md border border-white/[0.07] bg-white/[0.04] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-slate-200">
+                    <p className="mt-1 rounded-2xl rounded-tl-md border border-white/[0.07] bg-white/[0.04] px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap text-neutral-200">
                       {c.text}
                     </p>
                     {c.memberId === state.currentUserId && (
                       <button
-                        className="mt-1 text-xs text-slate-400 hover:text-rose-200"
+                        className="mt-1 text-xs text-neutral-400 hover:text-rose-200"
                         onClick={() => {
                           actions.deleteComment(task.id, c.id);
                           toast.info("Comentário removido");
@@ -715,11 +715,11 @@ function ActivityTabs({ task }: { task: Task }) {
             const m = state.members[h.memberId];
             return (
               <li key={h.id} className="relative">
-                <span className="absolute top-1.5 -left-[25px] size-2.5 rounded-full border-2 border-[#0e0e2a] bg-violet-400" aria-hidden />
-                <p className="text-sm text-slate-200">
+                <span className="absolute top-1.5 -left-[25px] size-2.5 rounded-full border-2 border-[#141414] bg-brand-400" aria-hidden />
+                <p className="text-sm text-neutral-200">
                   <span className="font-semibold text-white">{m?.name ?? "Membro"}</span> {h.text}
                 </p>
-                <p className="text-xs text-slate-400">{relativeTime(h.createdAt)}</p>
+                <p className="text-xs text-neutral-400">{relativeTime(h.createdAt)}</p>
               </li>
             );
           })}
@@ -779,7 +779,7 @@ function Properties({ task }: { task: Task }) {
               onClick={() => actions.updateTask(task.id, { priority: p.id as Priority })}
               className={cn(
                 "flex h-9 items-center gap-2 rounded-xl border px-2.5 text-[13px] font-semibold transition",
-                task.priority === p.id ? cn("border-transparent ring-1", priorityStyle[p.id].chip) : "border-white/10 text-slate-300 hover:border-white/25",
+                task.priority === p.id ? cn("border-transparent ring-1", priorityStyle[p.id].chip) : "border-white/10 text-neutral-300 hover:border-white/25",
               )}
             >
               <span className={cn("size-2 rounded-full", priorityStyle[p.id].dot)} aria-hidden />
@@ -797,7 +797,7 @@ function Properties({ task }: { task: Task }) {
           <Popover
             align="end"
             trigger={(p) => (
-              <button {...p} onClick={p.toggle} className="rounded-lg px-2 py-0.5 text-xs font-semibold text-cyan-200 hover:bg-white/[0.06]">
+              <button {...p} onClick={p.toggle} className="rounded-lg px-2 py-0.5 text-xs font-semibold text-brand-200 hover:bg-white/[0.06]">
                 Editar
               </button>
             )}
@@ -810,24 +810,24 @@ function Properties({ task }: { task: Task }) {
                   role="menuitemcheckbox"
                   aria-checked={on}
                   onClick={() => actions.updateTask(task.id, { assigneeIds: toggle(task.assigneeIds, m.id) })}
-                  className="flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-left text-sm text-slate-200 hover:bg-white/[0.08]"
+                  className="flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-left text-sm text-neutral-200 hover:bg-white/[0.08]"
                 >
                   <Avatar member={m} size="sm" title={false} />
                   <span className="flex-1">{m.name}</span>
-                  {on && <Check className="size-4 text-cyan-300" />}
+                  {on && <Check className="size-4 text-brand-300" />}
                 </button>
               );
             })}
           </Popover>
         </div>
         {task.assigneeIds.length === 0 ? (
-          <p className="text-sm text-slate-400">Ninguém atribuído</p>
+          <p className="text-sm text-neutral-400">Ninguém atribuído</p>
         ) : (
           <ul className="space-y-1.5">
             {task.assigneeIds.map((id) => {
               const m = state.members[id];
               return (
-                <li key={id} className="flex items-center gap-2.5 text-sm text-slate-100">
+                <li key={id} className="flex items-center gap-2.5 text-sm text-neutral-100">
                   <Avatar member={m} size="sm" />
                   <span className="truncate">{m?.name}</span>
                 </li>
@@ -842,7 +842,7 @@ function Properties({ task }: { task: Task }) {
           <CalendarDays className="size-3.5" /> Datas
         </p>
         <div>
-          <label htmlFor="prop-start" className="mb-1 block text-xs text-slate-400">
+          <label htmlFor="prop-start" className="mb-1 block text-xs text-neutral-400">
             Início
           </label>
           <input
@@ -862,7 +862,7 @@ function Properties({ task }: { task: Task }) {
           />
         </div>
         <div>
-          <label htmlFor="prop-due" className="mb-1 flex items-center justify-between text-xs text-slate-400">
+          <label htmlFor="prop-due" className="mb-1 flex items-center justify-between text-xs text-neutral-400">
             Prazo
             {ds && task.dueDate && (
               <span
@@ -871,7 +871,7 @@ function Properties({ task }: { task: Task }) {
                   ds === "overdue" && "text-rose-300",
                   ds === "soon" && "text-amber-200",
                   ds === "done" && "text-emerald-300",
-                  ds === "later" && "text-slate-300",
+                  ds === "later" && "text-neutral-300",
                 )}
               >
                 {ds === "overdue" ? "Atrasada · " : ""}
@@ -894,7 +894,7 @@ function Properties({ task }: { task: Task }) {
               actions.updateTask(task.id, { dueDate: v });
             }}
           />
-          {task.dueDate && <p className="mt-1 text-xs text-slate-400 first-letter:uppercase">{formatLong(task.dueDate)}</p>}
+          {task.dueDate && <p className="mt-1 text-xs text-neutral-400 first-letter:uppercase">{formatLong(task.dueDate)}</p>}
         </div>
       </div>
 
@@ -907,7 +907,7 @@ function Properties({ task }: { task: Task }) {
             align="end"
             panelClassName="w-64"
             trigger={(p) => (
-              <button {...p} onClick={p.toggle} className="rounded-lg px-2 py-0.5 text-xs font-semibold text-cyan-200 hover:bg-white/[0.06]">
+              <button {...p} onClick={p.toggle} className="rounded-lg px-2 py-0.5 text-xs font-semibold text-brand-200 hover:bg-white/[0.06]">
                 Editar
               </button>
             )}
@@ -921,11 +921,11 @@ function Properties({ task }: { task: Task }) {
                     role="menuitemcheckbox"
                     aria-checked={on}
                     onClick={() => actions.updateTask(task.id, { labelIds: toggle(task.labelIds, l.id) })}
-                    className="flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-left text-sm text-slate-200 hover:bg-white/[0.08]"
+                    className="flex w-full items-center gap-2.5 rounded-xl px-2.5 py-2 text-left text-sm text-neutral-200 hover:bg-white/[0.08]"
                   >
                     <span className={cn("h-2.5 w-6 rounded-full", labelStyle[l.color].bar)} aria-hidden />
                     <span className="flex-1">{l.name}</span>
-                    {on && <Check className="size-4 text-cyan-300" />}
+                    {on && <Check className="size-4 text-brand-300" />}
                   </button>
                 );
               })}
@@ -967,7 +967,7 @@ function Properties({ task }: { task: Task }) {
           </Popover>
         </div>
         {task.labelIds.length === 0 ? (
-          <p className="text-sm text-slate-400">Sem etiquetas</p>
+          <p className="text-sm text-neutral-400">Sem etiquetas</p>
         ) : (
           <div className="flex flex-wrap gap-1.5">
             {task.labelIds.map((l) => (

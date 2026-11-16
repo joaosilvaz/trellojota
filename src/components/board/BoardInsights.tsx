@@ -34,7 +34,7 @@ export function BoardInsights({ boardId, onClose }: { boardId: string; onClose: 
           <defs>
             <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stopColor={acc.from} />
-              <stop offset="1" stopColor="#22d3ee" />
+              <stop offset="1" stopColor="#eea486" />
             </linearGradient>
           </defs>
           <circle cx="42" cy="42" r="34" stroke="rgba(255,255,255,0.08)" strokeWidth="8" fill="none" />
@@ -64,7 +64,7 @@ export function BoardInsights({ boardId, onClose }: { boardId: string; onClose: 
           ].map(([l, v, c]) => (
             <div key={l as string} className="rounded-xl bg-white/[0.04] px-2 py-1.5">
               <dd className={cn("font-display text-lg font-semibold", c as string)}>{v}</dd>
-              <dt className="text-[11px] text-slate-400">{l}</dt>
+              <dt className="text-[11px] text-neutral-400">{l}</dt>
             </div>
           ))}
         </dl>
@@ -81,8 +81,8 @@ export function BoardInsights({ boardId, onClose }: { boardId: string; onClose: 
                 <Avatar member={m} size="sm" />
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex justify-between text-xs">
-                    <span className="truncate text-slate-200">{m?.name}</span>
-                    <span className="text-slate-400">{n}</span>
+                    <span className="truncate text-neutral-200">{m?.name}</span>
+                    <span className="text-neutral-400">{n}</span>
                   </div>
                   <ProgressBar value={(n / maxLoad) * 100} tone={`linear-gradient(90deg, ${acc.from}, ${acc.to})`} label={`Carga de ${m?.name}`} />
                 </div>
@@ -95,15 +95,15 @@ export function BoardInsights({ boardId, onClose }: { boardId: string; onClose: 
       <div>
         <p className="label-xs mb-2">Próximos prazos</p>
         {upcoming.length === 0 ? (
-          <p className="text-sm text-slate-400">Sem prazos nas próximas duas semanas.</p>
+          <p className="text-sm text-neutral-400">Sem prazos nas próximas duas semanas.</p>
         ) : (
           <ul className="space-y-1">
             {upcoming.map((t) => (
               <li key={t.id}>
                 <button onClick={() => openTask(t.id)} className="flex w-full items-center gap-2.5 rounded-xl px-2 py-2 text-left hover:bg-white/[0.06]">
                   <span className={cn("size-2 shrink-0 rounded-full", priorityStyle[t.priority].dot)} aria-hidden />
-                  <span className="min-w-0 flex-1 truncate text-sm text-slate-100">{t.title}</span>
-                  <span className={cn("text-xs font-semibold", t.dueDate! < today() ? "text-rose-300" : "text-slate-400")}>
+                  <span className="min-w-0 flex-1 truncate text-sm text-neutral-100">{t.title}</span>
+                  <span className={cn("text-xs font-semibold", t.dueDate! < today() ? "text-rose-300" : "text-neutral-400")}>
                     {dueLabel(t.dueDate!)}
                   </span>
                 </button>

@@ -16,6 +16,8 @@ export interface Member {
   role: string;
   /** gradient key used by the avatar */
   hue: number;
+  /** foto de perfil (URL); sem foto, usa as iniciais */
+  photo?: string;
 }
 
 export interface Label {
@@ -85,7 +87,7 @@ export interface Column {
   isDone?: boolean;
 }
 
-export type BoardAccent = "violet" | "blue" | "cyan" | "pink" | "amber" | "green";
+export type BoardAccent = "orange" | "violet" | "blue" | "cyan" | "pink" | "amber" | "green";
 
 export interface Board {
   id: string;
@@ -119,6 +121,8 @@ export interface Notification {
 export interface Settings {
   reducedMotion: "system" | "reduce";
   sidebarCollapsed: boolean;
+  theme: "dark" | "light";
+  instagramBoardAdded?: boolean;
 }
 
 export interface AppState {

@@ -43,7 +43,7 @@ export function ListView({ boardId, filters, sort }: { boardId: string; filters:
 
   return (
     <div className="space-y-4 px-4 pb-8 sm:px-6 lg:px-8">
-      <div className="hidden grid-cols-[minmax(0,1fr)_150px_130px_110px_150px_40px] gap-3 px-5 text-xs font-semibold tracking-wide text-slate-400 uppercase lg:grid">
+      <div className="hidden grid-cols-[minmax(0,1fr)_150px_130px_110px_150px_40px] gap-3 px-5 text-xs font-semibold tracking-wide text-neutral-400 uppercase lg:grid">
         <span>Tarefa</span>
         <span>Status</span>
         <span>Prioridade</span>
@@ -58,10 +58,10 @@ export function ListView({ boardId, filters, sort }: { boardId: string; filters:
             onClick={() => setCollapsed((c) => ({ ...c, [col.id]: !c[col.id] }))}
             aria-expanded={!collapsed[col.id]}
           >
-            <ChevronDown className={cn("size-4 text-slate-400 transition", collapsed[col.id] && "-rotate-90")} />
+            <ChevronDown className={cn("size-4 text-neutral-400 transition", collapsed[col.id] && "-rotate-90")} />
             <span className="font-display text-[15px] font-semibold text-white">{col.title}</span>
             {col.isDone && <CheckCircle2 className="size-4 text-emerald-300" aria-hidden />}
-            <span className="rounded-full bg-white/[0.08] px-2 py-0.5 text-xs font-semibold text-slate-300">{tasks.length}</span>
+            <span className="rounded-full bg-white/[0.08] px-2 py-0.5 text-xs font-semibold text-neutral-300">{tasks.length}</span>
           </button>
           {!collapsed[col.id] && (
             <>
@@ -71,7 +71,7 @@ export function ListView({ boardId, filters, sort }: { boardId: string; filters:
                 ))}
               </ul>
               <button
-                className="flex h-11 w-full items-center gap-2 border-t border-white/[0.05] px-5 text-sm font-semibold text-slate-400 transition hover:bg-white/[0.04] hover:text-white"
+                className="flex h-11 w-full items-center gap-2 border-t border-white/[0.05] px-5 text-sm font-semibold text-neutral-400 transition hover:bg-white/[0.04] hover:text-white"
                 onClick={() => openNewTask({ boardId, columnId: col.id })}
               >
                 <Plus className="size-4" /> Adicionar tarefa em {col.title}
@@ -116,7 +116,7 @@ function ListRow({ task }: { task: Task }) {
             toast.success(done ? "Tarefa reaberta" : "Tarefa concluída");
           }}
           aria-label={done ? `Reabrir ${task.title}` : `Concluir ${task.title}`}
-          className={cn("shrink-0 transition", done ? "text-emerald-300" : "text-slate-500 hover:text-emerald-300")}
+          className={cn("shrink-0 transition", done ? "text-emerald-300" : "text-neutral-500 hover:text-emerald-300")}
         >
           {done ? <CheckCircle2 className="size-5" /> : <Circle className="size-5" />}
         </button>
@@ -140,7 +140,7 @@ function ListRow({ task }: { task: Task }) {
             />
           ) : (
             <button
-              className={cn("block max-w-full truncate text-left text-sm font-semibold", done ? "text-slate-400 line-through" : "text-white hover:text-cyan-100")}
+              className={cn("block max-w-full truncate text-left text-sm font-semibold", done ? "text-neutral-400 line-through" : "text-white hover:text-brand-100")}
               onClick={() => {
                 setTitle(task.title);
                 setEditing(true);
@@ -150,7 +150,7 @@ function ListRow({ task }: { task: Task }) {
               {task.title}
             </button>
           )}
-          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-slate-400">
+          <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-neutral-400">
             {task.labelIds.map((l) => {
               const lb = state.labels[l];
               return lb ? (
@@ -209,7 +209,7 @@ function ListRow({ task }: { task: Task }) {
           {task.assigneeIds.length ? (
             <AvatarStack members={task.assigneeIds.map((m) => state.members[m])} max={3} size="sm" />
           ) : (
-            <span className="text-xs text-slate-500">—</span>
+            <span className="text-xs text-neutral-500">—</span>
           )}
         </div>
         <input

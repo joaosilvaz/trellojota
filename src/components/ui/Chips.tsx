@@ -32,7 +32,7 @@ export function ProgressBar({
   const pct = Math.max(0, Math.min(100, value));
   const bg =
     tone === "brand"
-      ? "linear-gradient(90deg, #5b6cff, #8b5cf6, #22d3ee)"
+      ? "linear-gradient(90deg, #c15f3c, #d97757, #eea486)"
       : tone === "done"
         ? "linear-gradient(90deg, #10b981, #34d399)"
         : tone;
@@ -65,11 +65,11 @@ export function EmptyState({
 }) {
   return (
     <div className={cn("flex flex-col items-center justify-center px-6 py-10 text-center", className)}>
-      <div className="mb-4 grid size-12 place-items-center rounded-2xl border border-white/10 bg-gradient-to-br from-electric-500/25 to-violet-500/20">
-        <Icon className="size-5 text-electric-300" />
+      <div className="mb-4 grid size-12 place-items-center rounded-2xl border border-white/10 bg-gradient-to-br from-brand-500/25 to-brand-600/20">
+        <Icon className="size-5 text-brand-300" />
       </div>
       <p className="font-display text-[15px] font-semibold text-white">{title}</p>
-      {description && <p className="mt-1 max-w-xs text-sm text-slate-400">{description}</p>}
+      {description && <p className="mt-1 max-w-xs text-sm text-neutral-400">{description}</p>}
       {action && <div className="mt-4">{action}</div>}
     </div>
   );

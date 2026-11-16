@@ -96,7 +96,7 @@ export function NewTaskModal() {
     >
       <form className="space-y-5" onSubmit={submit} noValidate>
         <div>
-          <label htmlFor="nt-title" className="mb-1.5 block text-sm font-semibold text-slate-200">
+          <label htmlFor="nt-title" className="mb-1.5 block text-sm font-semibold text-neutral-200">
             Título
           </label>
           <input
@@ -114,7 +114,7 @@ export function NewTaskModal() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="nt-board" className="mb-1.5 block text-sm font-semibold text-slate-200">
+            <label htmlFor="nt-board" className="mb-1.5 block text-sm font-semibold text-neutral-200">
               Quadro
             </label>
             <select
@@ -136,7 +136,7 @@ export function NewTaskModal() {
             {errors.board && <p className="mt-1.5 text-[13px] text-rose-300">{errors.board}</p>}
           </div>
           <div>
-            <label htmlFor="nt-col" className="mb-1.5 block text-sm font-semibold text-slate-200">
+            <label htmlFor="nt-col" className="mb-1.5 block text-sm font-semibold text-neutral-200">
               Coluna
             </label>
             <select id="nt-col" className="field" value={columnId} onChange={(e) => setColumnId(e.target.value)}>
@@ -151,8 +151,8 @@ export function NewTaskModal() {
         </div>
 
         <div>
-          <label htmlFor="nt-desc" className="mb-1.5 block text-sm font-semibold text-slate-200">
-            Descrição <span className="font-normal text-slate-400">(opcional)</span>
+          <label htmlFor="nt-desc" className="mb-1.5 block text-sm font-semibold text-neutral-200">
+            Descrição <span className="font-normal text-neutral-400">(opcional)</span>
           </label>
           <textarea
             id="nt-desc"
@@ -165,7 +165,7 @@ export function NewTaskModal() {
 
         <div className="grid gap-4 sm:grid-cols-3">
           <div>
-            <label htmlFor="nt-pri" className="mb-1.5 block text-sm font-semibold text-slate-200">
+            <label htmlFor="nt-pri" className="mb-1.5 block text-sm font-semibold text-neutral-200">
               Prioridade
             </label>
             <select id="nt-pri" className="field" value={priority} onChange={(e) => setPriority(e.target.value as Priority)}>
@@ -177,13 +177,13 @@ export function NewTaskModal() {
             </select>
           </div>
           <div>
-            <label htmlFor="nt-start" className="mb-1.5 block text-sm font-semibold text-slate-200">
+            <label htmlFor="nt-start" className="mb-1.5 block text-sm font-semibold text-neutral-200">
               Início
             </label>
             <input id="nt-start" type="date" className="field" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
           </div>
           <div>
-            <label htmlFor="nt-due" className="mb-1.5 block text-sm font-semibold text-slate-200">
+            <label htmlFor="nt-due" className="mb-1.5 block text-sm font-semibold text-neutral-200">
               Prazo
             </label>
             <input
@@ -199,7 +199,7 @@ export function NewTaskModal() {
         {errors.due && <p className="-mt-3 text-[13px] text-rose-300">{errors.due}</p>}
 
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold text-slate-200">Responsáveis</legend>
+          <legend className="mb-2 text-sm font-semibold text-neutral-200">Responsáveis</legend>
           <div className="flex flex-wrap gap-2">
             {Object.values(state.members).map((m) => {
               const on = assigneeIds.includes(m.id);
@@ -211,7 +211,7 @@ export function NewTaskModal() {
                   onClick={() => setAssigneeIds(toggle(assigneeIds, m.id))}
                   className={cn(
                     "flex h-9 items-center gap-2 rounded-full border pr-3 pl-1 text-sm transition",
-                    on ? "border-electric-400/60 bg-electric-500/20 text-white" : "border-white/10 text-slate-300 hover:border-white/25",
+                    on ? "border-brand-400/60 bg-brand-500/20 text-white" : "border-white/10 text-neutral-300 hover:border-white/25",
                   )}
                 >
                   <Avatar member={m} size="xs" title={false} />
@@ -223,7 +223,7 @@ export function NewTaskModal() {
         </fieldset>
 
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold text-slate-200">Etiquetas</legend>
+          <legend className="mb-2 text-sm font-semibold text-neutral-200">Etiquetas</legend>
           <div className="flex flex-wrap gap-2">
             {Object.values(state.labels).map((l) => {
               const on = labelIds.includes(l.id);
@@ -233,7 +233,7 @@ export function NewTaskModal() {
                   key={l.id}
                   aria-pressed={on}
                   onClick={() => setLabelIds(toggle(labelIds, l.id))}
-                  className={cn("chip px-3 py-1.5 text-[13px] transition", on ? labelStyle[l.color].chip : "text-slate-400 ring-white/10 hover:text-slate-200")}
+                  className={cn("chip px-3 py-1.5 text-[13px] transition", on ? labelStyle[l.color].chip : "text-neutral-400 ring-white/10 hover:text-neutral-200")}
                 >
                   {l.name}
                 </button>

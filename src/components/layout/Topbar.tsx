@@ -8,6 +8,8 @@ import {
   ChevronDown,
   Keyboard,
   Menu,
+  Moon,
+  Sun,
   Plus,
   RotateCcw,
   Search,
@@ -39,7 +41,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
   const workload = memberWorkload(state);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#07071d]/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-[#0a0a0a]/70 backdrop-blur-xl">
       <div className="relative flex h-16 items-center gap-2 px-3 sm:gap-3 sm:px-5 lg:px-8">
         <button className="icon-btn lg:hidden" onClick={onOpenMobileNav} aria-label="Abrir menu">
           <Menu className="size-5" />
@@ -55,11 +57,11 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
             <button
               {...p}
               onClick={p.toggle}
-              className="flex h-10 items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-3 text-sm font-semibold text-slate-100 transition hover:bg-white/[0.08]"
+              className="flex h-10 items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-3 text-sm font-semibold text-neutral-100 transition hover:bg-white/[0.08]"
             >
-              <span className="size-2 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.8)]" aria-hidden />
+              <span className="size-2 rounded-full bg-brand-300 shadow-[0_0_10px_rgba(217,119,87,0.8)]" aria-hidden />
               <span className="max-w-36 truncate">{state.workspaceName}</span>
-              <ChevronDown className="size-4 text-slate-400" />
+              <ChevronDown className="size-4 text-neutral-400" />
             </button>
           )}
           panelClassName="w-80 p-3"
@@ -68,7 +70,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
             <div>
               <p className="label-xs px-1">Espaço de trabalho</p>
               <p className="mt-1 px-1 font-display text-base font-semibold text-white">{state.workspaceName}</p>
-              <p className="px-1 text-xs text-slate-400">
+              <p className="px-1 text-xs text-neutral-400">
                 {members.length} membros · {state.boardOrder.length} quadros
               </p>
               <ul className="mt-3 space-y-1">
@@ -77,11 +79,11 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
                     <Avatar member={m} size="md" />
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold text-white">
-                        {m.name} {m.id === state.currentUserId && <span className="text-xs text-cyan-200">(você)</span>}
+                        {m.name} {m.id === state.currentUserId && <span className="text-xs text-brand-200">(você)</span>}
                       </p>
-                      <p className="truncate text-xs text-slate-400">{m.role}</p>
+                      <p className="truncate text-xs text-neutral-400">{m.role}</p>
                     </div>
-                    <span className="text-xs text-slate-400">{workload.get(m.id) ?? 0} abertas</span>
+                    <span className="text-xs text-neutral-400">{workload.get(m.id) ?? 0} abertas</span>
                   </li>
                 ))}
               </ul>
@@ -115,6 +117,15 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
             <AvatarStack members={members} max={4} />
           </div>
 
+          <button
+            className="icon-btn"
+            onClick={() => actions.updateSettings({ theme: state.settings.theme === "light" ? "dark" : "light" })}
+            aria-label={state.settings.theme === "light" ? "Mudar para tema preto" : "Mudar para tema branco"}
+            title={state.settings.theme === "light" ? "Tema preto" : "Tema branco"}
+          >
+            {state.settings.theme === "light" ? <Moon className="size-5" /> : <Sun className="size-5" />}
+          </button>
+
           {/* notificações */}
           <Popover
             align="end"
@@ -122,7 +133,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
               <button {...p} onClick={p.toggle} className="icon-btn relative" aria-label={`Notificações${unread ? `, ${unread} não lidas` : ""}`}>
                 <Bell className="size-5" />
                 {unread > 0 && (
-                  <span className="absolute top-1.5 right-1.5 grid min-w-4 place-items-center rounded-full bg-gradient-to-br from-pink-500 to-violet-500 px-1 text-[10px] font-bold text-white">
+                  <span className="absolute top-1.5 right-1.5 grid min-w-4 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 px-1 text-[10px] font-bold text-white">
                     {unread}
                   </span>
                 )}
@@ -135,7 +146,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
                 <div className="flex items-center justify-between px-2 py-1.5">
                   <p className="font-display text-sm font-semibold text-white">Notificações</p>
                   <button
-                    className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-cyan-200 hover:bg-white/[0.06] disabled:opacity-40"
+                    className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-brand-200 hover:bg-white/[0.06] disabled:opacity-40"
                     onClick={() => actions.markAllNotificationsRead()}
                     disabled={unread === 0}
                   >
@@ -143,7 +154,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
                   </button>
                 </div>
                 {state.notifications.length === 0 ? (
-                  <p className="px-3 py-8 text-center text-sm text-slate-400">Tudo em dia por aqui.</p>
+                  <p className="px-3 py-8 text-center text-sm text-neutral-400">Tudo em dia por aqui.</p>
                 ) : (
                   <ul className="max-h-80 space-y-0.5 overflow-y-auto scroll-thin">
                     {state.notifications.map((n) => (
@@ -157,10 +168,10 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
                             else if (n.boardId) router.push(`/boards/${n.boardId}`);
                           }}
                         >
-                          <span className={cn("mt-1.5 size-2 shrink-0 rounded-full", n.read ? "bg-white/15" : "bg-cyan-300")} aria-hidden />
+                          <span className={cn("mt-1.5 size-2 shrink-0 rounded-full", n.read ? "bg-white/15" : "bg-brand-300")} aria-hidden />
                           <span className="min-w-0">
-                            <span className={cn("block text-sm", n.read ? "text-slate-300" : "font-semibold text-white")}>{n.text}</span>
-                            <span className="text-xs text-slate-400">{relativeTime(n.createdAt)}</span>
+                            <span className={cn("block text-sm", n.read ? "text-neutral-300" : "font-semibold text-white")}>{n.text}</span>
+                            <span className="text-xs text-neutral-400">{relativeTime(n.createdAt)}</span>
                           </span>
                         </button>
                       </li>
@@ -177,7 +188,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
             trigger={(p) => (
               <button {...p} onClick={p.toggle} className="flex items-center gap-2 rounded-xl p-1 transition hover:bg-white/[0.06]" aria-label="Menu do usuário">
                 <Avatar member={me} size="md" title={false} />
-                <ChevronDown className="mr-1 hidden size-4 text-slate-400 sm:block" />
+                <ChevronDown className="mr-1 hidden size-4 text-neutral-400 sm:block" />
               </button>
             )}
             panelClassName="w-64"
@@ -188,7 +199,7 @@ export function Topbar({ onOpenMobileNav }: { onOpenMobileNav: () => void }) {
                   <Avatar member={me} size="lg" title={false} />
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-white">{me.name}</p>
-                    <p className="truncate text-xs text-slate-400">{me.role}</p>
+                    <p className="truncate text-xs text-neutral-400">{me.role}</p>
                   </div>
                 </div>
                 <MenuSeparator />
@@ -243,7 +254,7 @@ export function ShortcutsModal({ open, onClose }: { open: boolean; onClose: () =
       <ul className="space-y-2">
         {rows.map(([k, v]) => (
           <li key={k} className="flex items-center justify-between gap-4 text-sm">
-            <span className="text-slate-300">{v}</span>
+            <span className="text-neutral-300">{v}</span>
             <kbd className="rounded-lg border border-white/10 bg-white/[0.05] px-2 py-1 text-xs font-semibold text-white">{k}</kbd>
           </li>
         ))}

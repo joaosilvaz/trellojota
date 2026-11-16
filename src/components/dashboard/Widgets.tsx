@@ -14,10 +14,10 @@ export function StatCards() {
   const state = useAppState();
   const s = taskStats(state);
   const items = [
-    { label: "Em aberto", value: s.open, hint: `${s.total} no total`, icon: CircleDot, tone: "from-electric-500/30 to-electric-500/0", iconCls: "text-electric-300" },
+    { label: "Em aberto", value: s.open, hint: `${s.total} no total`, icon: CircleDot, tone: "from-brand-500/30 to-brand-500/0", iconCls: "text-brand-300" },
     { label: "Concluídas", value: s.done, hint: `${s.total ? Math.round((s.done / s.total) * 100) : 0}% do total`, icon: CheckCircle2, tone: "from-emerald-500/25 to-emerald-500/0", iconCls: "text-emerald-300" },
     { label: "Atrasadas", value: s.overdue, hint: s.overdue ? "Precisam de atenção" : "Nada atrasado", icon: TriangleAlert, tone: "from-rose-500/25 to-rose-500/0", iconCls: "text-rose-300" },
-    { label: "Prazo próximo", value: s.soon, hint: "Nos próximos 3 dias", icon: AlarmClock, tone: "from-amber-500/25 to-amber-500/0", iconCls: "text-amber-200" },
+    { label: "Vencendo", value: s.soon, hint: "Nos próximos 3 dias", icon: AlarmClock, tone: "from-amber-500/25 to-amber-500/0", iconCls: "text-amber-200" },
   ];
   return (
     <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
@@ -28,10 +28,10 @@ export function StatCards() {
             <span className="grid size-8 shrink-0 place-items-center rounded-xl border border-white/[0.08] bg-white/[0.05]">
               <it.icon className={cn("size-4", it.iconCls)} aria-hidden />
             </span>
-            <p className="truncate text-sm font-semibold text-slate-200">{it.label}</p>
+            <p className="truncate text-sm font-semibold text-neutral-200">{it.label}</p>
           </div>
           <p className="font-display mt-3 text-3xl font-semibold text-white sm:text-4xl">{it.value}</p>
-          <p className="mt-1 truncate text-xs text-slate-400">{it.hint}</p>
+          <p className="mt-1 truncate text-xs text-neutral-400">{it.hint}</p>
         </li>
       ))}
     </ul>
@@ -45,7 +45,7 @@ export function ProjectProgress() {
     <div className="glass h-full rounded-3xl p-5 sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-display text-[15px] font-semibold text-white">Progresso dos projetos</h2>
-        <Link href="/boards" className="text-xs font-semibold text-cyan-200 hover:underline">
+        <Link href="/boards" className="text-xs font-semibold text-brand-200 hover:underline">
           Ver quadros
         </Link>
       </div>
@@ -61,8 +61,8 @@ export function ProjectProgress() {
                 <Link href={`/boards/${b.id}`} className="group block rounded-xl">
                   <div className="mb-2 flex items-center gap-3">
                     <span className="size-2.5 rounded-[4px]" style={{ background: `linear-gradient(135deg, ${acc.from}, ${acc.to})` }} aria-hidden />
-                    <span className="min-w-0 flex-1 truncate text-sm font-semibold text-slate-100 group-hover:text-white">{b.title}</span>
-                    <span className="text-xs text-slate-400">
+                    <span className="min-w-0 flex-1 truncate text-sm font-semibold text-neutral-100 group-hover:text-white">{b.title}</span>
+                    <span className="text-xs text-neutral-400">
                       {p.done}/{p.total}
                     </span>
                     <span className="w-10 text-right text-sm font-semibold text-white">{p.pct}%</span>
@@ -78,11 +78,12 @@ export function ProjectProgress() {
   );
 }
 
-export function UpcomingList({ days = 7 }: { days?: number }) {
+export function UpcomingList({ days = 7, limit = 7 }: { days?: number; limit?: number }) {
   const state = useAppState();
   const { openTask, actions, openNewTask } = useStore();
   const toast = useToast();
-  const tasks = upcomingTasks(state, days);
+  const all = upcomingTasks(state, days);
+  const tasks = all.slice(0, limit);
   const t0 = today();
 
   const groups: { key: string; title: string; items: typeof tasks }[] = [];
@@ -102,7 +103,7 @@ export function UpcomingList({ days = 7 }: { days?: number }) {
     <div className="glass h-full rounded-3xl p-5 sm:p-6">
       <div className="mb-3 flex items-center justify-between">
         <h2 className="font-display text-[15px] font-semibold text-white">Próximos dias</h2>
-        <Link href="/calendar" className="text-xs font-semibold text-cyan-200 hover:underline">
+        <Link href="/calendar" className="text-xs font-semibold text-brand-200 hover:underline">
           Abrir calendário
         </Link>
       </div>
@@ -121,14 +122,14 @@ export function UpcomingList({ days = 7 }: { days?: number }) {
         <div className="space-y-4">
           {groups.map((g) => (
             <div key={g.key}>
-              <p className={cn("mb-1.5 text-xs font-semibold first-letter:uppercase", g.key === "overdue" ? "text-rose-300" : "text-slate-400")}>
+              <p className={cn("mb-1.5 text-xs font-semibold first-letter:uppercase", g.key === "overdue" ? "text-rose-300" : "text-neutral-400")}>
                 {g.title} · {g.items.length}
               </p>
               <ul className="space-y-1">
                 {g.items.map((t) => (
                   <li key={t.id} className="group flex items-center gap-3 rounded-2xl px-2 py-2 transition hover:bg-white/[0.05]">
                     <button
-                      className="grid size-6 shrink-0 place-items-center rounded-full text-slate-400 transition hover:text-emerald-300"
+                      className="grid size-6 shrink-0 place-items-center rounded-full text-neutral-400 transition hover:text-emerald-300"
                       onClick={() => {
                         actions.toggleDone(t.id);
                         toast.success("Tarefa concluída", t.title);
@@ -138,8 +139,8 @@ export function UpcomingList({ days = 7 }: { days?: number }) {
                       <Circle className="size-5" />
                     </button>
                     <button className="min-w-0 flex-1 text-left" onClick={() => openTask(t.id)}>
-                      <span className="block truncate text-sm font-medium text-slate-100 group-hover:text-white">{t.title}</span>
-                      <span className="flex items-center gap-2 text-xs text-slate-400">
+                      <span className="block truncate text-sm font-medium text-neutral-100 group-hover:text-white">{t.title}</span>
+                      <span className="flex items-center gap-2 text-xs text-neutral-400">
                         <span className={cn("size-1.5 rounded-full", priorityStyle[t.priority].dot)} aria-hidden />
                         {state.boards[t.boardId]?.title}
                       </span>
@@ -150,6 +151,11 @@ export function UpcomingList({ days = 7 }: { days?: number }) {
               </ul>
             </div>
           ))}
+          {all.length > tasks.length && (
+            <Link href="/calendar" className="flex h-10 items-center justify-center rounded-xl border border-white/[0.07] text-[13px] font-semibold text-neutral-300 transition hover:bg-white/[0.05] hover:text-white">
+              Ver mais {all.length - tasks.length} no calendário
+            </Link>
+          )}
         </div>
       )}
     </div>
@@ -165,7 +171,7 @@ export function ActivityItem({ a }: { a: Activity }) {
     <li className="flex gap-3">
       <Avatar member={m} size="sm" />
       <div className="min-w-0 flex-1 text-sm">
-        <p className="text-slate-300">
+        <p className="text-neutral-300">
           <span className="font-semibold text-white">{m?.name.split(" ")[0] ?? "Alguém"}</span>{" "}
           {canOpen ? (
             <button className="text-left hover:text-white hover:underline" onClick={() => openTask(a.taskId!)}>
@@ -175,7 +181,7 @@ export function ActivityItem({ a }: { a: Activity }) {
             a.text
           )}
         </p>
-        <p className="mt-0.5 text-xs text-slate-500">
+        <p className="mt-0.5 text-xs text-neutral-500">
           {relativeTime(a.createdAt)}
           {a.boardId && state.boards[a.boardId] ? ` · ${state.boards[a.boardId].title}` : ""}
         </p>
@@ -191,12 +197,12 @@ export function RecentActivity({ limit = 6 }: { limit?: number }) {
     <div className="glass rounded-3xl p-5">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-display text-[15px] font-semibold text-white">Atividade recente</h2>
-        <Link href="/activity" className="text-xs font-semibold text-cyan-200 hover:underline">
+        <Link href="/activity" className="text-xs font-semibold text-brand-200 hover:underline">
           Ver tudo
         </Link>
       </div>
       {items.length === 0 ? (
-        <p className="text-sm text-slate-400">As ações da equipe aparecerão aqui.</p>
+        <p className="text-sm text-neutral-400">As ações da equipe aparecerão aqui.</p>
       ) : (
         <ul className="space-y-4">
           {items.map((a) => (
@@ -247,11 +253,11 @@ export function FavoritesQuick() {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block truncate text-sm font-semibold text-white">{b.title}</span>
-                    <span className="block text-xs text-slate-400">
+                    <span className="block text-xs text-neutral-400">
                       {open} abertas · {p.pct}% concluído
                     </span>
                   </span>
-                  <ArrowRight className="size-4 text-slate-500 transition group-hover:translate-x-0.5 group-hover:text-white" />
+                  <ArrowRight className="size-4 text-neutral-500 transition group-hover:translate-x-0.5 group-hover:text-white" />
                 </Link>
               </li>
             );
