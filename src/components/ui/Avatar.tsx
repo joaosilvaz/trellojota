@@ -26,7 +26,7 @@ export function Avatar({
       aria-label={member.name}
       role="img"
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full font-bold text-white ring-2 ring-[#0d0d2b]",
+        "inline-flex shrink-0 items-center justify-center rounded-full font-bold text-white ring-2 ring-[#111111]",
         sizes[size],
         className,
       )}
@@ -34,7 +34,12 @@ export function Avatar({
         background: `linear-gradient(135deg, hsl(${member.hue} 85% 66%), hsl(${member.hue + 35} 70% 42%))`,
       }}
     >
-      {member.initials}
+      {member.photo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={member.photo} alt="" className="size-full rounded-full object-cover" />
+      ) : (
+        member.initials
+      )}
     </span>
   );
 }
@@ -59,7 +64,7 @@ export function AvatarStack({
       {extra > 0 && (
         <span
           className={cn(
-            "inline-flex items-center justify-center rounded-full bg-white/10 font-bold text-slate-200 ring-2 ring-[#0d0d2b]",
+            "inline-flex items-center justify-center rounded-full bg-white/10 font-bold text-neutral-200 ring-2 ring-[#111111]",
             sizes[size],
           )}
           aria-label={`mais ${extra} membros`}

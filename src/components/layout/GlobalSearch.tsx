@@ -78,7 +78,7 @@ export function GlobalSearch() {
       )}
     >
       <div className="relative">
-        <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-slate-400" aria-hidden />
+        <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-neutral-400" aria-hidden />
         <input
           ref={inputRef}
           value={query}
@@ -109,7 +109,7 @@ export function GlobalSearch() {
           placeholder="Buscar quadros e tarefas…"
           className="field h-11 rounded-2xl border-white/[0.09] bg-white/[0.05] pr-20 pl-10"
         />
-        <kbd className="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 rounded-md border border-white/10 px-1.5 py-0.5 text-[11px] text-slate-400 md:block">
+        <kbd className="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 rounded-md border border-white/10 px-1.5 py-0.5 text-[11px] text-neutral-400 md:block">
           Ctrl K
         </kbd>
         {searchOpen && (
@@ -130,7 +130,7 @@ export function GlobalSearch() {
           className="glass-strong animate-scale-in absolute top-full right-0 left-0 z-50 mt-2 max-h-[70vh] overflow-y-auto rounded-2xl p-2 scroll-thin"
         >
           {flat.length === 0 && (
-            <p className="px-3 py-6 text-center text-sm text-slate-400">
+            <p className="px-3 py-6 text-center text-sm text-neutral-400">
               Nada encontrado para “{query}”. Tente outro termo.
             </p>
           )}
@@ -154,7 +154,7 @@ export function GlobalSearch() {
                 </span>
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-semibold text-white">{b.title}</span>
-                  <span className="block truncate text-xs text-slate-400">{b.description}</span>
+                  <span className="block truncate text-xs text-neutral-400">{b.description}</span>
                 </span>
               </button>
             );
@@ -172,14 +172,14 @@ export function GlobalSearch() {
                 onClick={() => choose({ type: "task", id: t.id })}
                 className={cn("flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left", cursor === i && "bg-white/[0.08]")}
               >
-                <span className={cn("size-2 shrink-0 rounded-full", col?.isDone ? "bg-emerald-400" : "bg-electric-400")} aria-hidden />
+                <span className={cn("size-2 shrink-0 rounded-full", col?.isDone ? "bg-emerald-400" : "bg-brand-400")} aria-hidden />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-medium text-white">{t.title}</span>
-                  <span className="block truncate text-xs text-slate-400">
+                  <span className="block truncate text-xs text-neutral-400">
                     {state.boards[t.boardId]?.title} · {col?.title}
                   </span>
                 </span>
-                {t.archived && <Archive className="size-3.5 text-slate-500" aria-label="Arquivada" />}
+                {t.archived && <Archive className="size-3.5 text-neutral-500" aria-label="Arquivada" />}
               </button>
             );
           })}

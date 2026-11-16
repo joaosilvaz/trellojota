@@ -11,6 +11,7 @@ import type {
   Task,
 } from "./types";
 import { createSeed, STATE_VERSION } from "./seed";
+import { sanitizeState } from "./migrate";
 import { formatShort, priorityName, uid } from "./utils";
 
 const STORAGE_KEY = "jota-boards:v1";
@@ -37,7 +38,7 @@ function loadState(): AppState {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as AppState;
-      if (parsed && parsed.version === STATE_VERSION && parsed.boards && parsed.tasks) return parsed;
+      if (parsed && parsed.version === STATE_VERSION && parsed.boards && parsed.tasks) return sanitizeState(parsed);
     }
   } catch {
     /* dados corrompidos: volta para a demonstração */
@@ -93,6 +94,11 @@ function useStoreValue() {
     if (!state) return;
     document.documentElement.dataset.motion = state.settings.reducedMotion;
   }, [state?.settings.reducedMotion, state]);
+
+  useEffect(() => {
+    if (!state) return;
+    document.documentElement.dataset.theme = state.settings.theme ?? "dark";
+  }, [state?.settings.theme, state]);
 
   const mutate = useCallback((recipe: Recipe) => {
     setState((prev) => {
@@ -481,7 +487,7 @@ function useStoreValue() {
         setState(createSeed());
       },
       importState(next: AppState) {
-        setState(next);
+        setState(sanitizeState(next));
       },
     };
   }, [mutate]);

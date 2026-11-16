@@ -78,7 +78,7 @@ export function Modal({
   if (!open || typeof document === "undefined") return null;
   return createPortal(
     <div className="fixed inset-0 z-[70] flex items-end justify-center p-0 sm:items-center sm:p-6">
-      <div className="animate-fade-in absolute inset-0 bg-[#03030f]/70 backdrop-blur-sm" onClick={onClose} aria-hidden />
+      <div className="animate-fade-in absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-hidden />
       <div
         ref={ref}
         role="dialog"
@@ -96,7 +96,7 @@ export function Modal({
             <h2 id={titleId} className="font-display text-lg font-semibold text-white">
               {title}
             </h2>
-            {description && <p className="mt-1 text-sm text-slate-300">{description}</p>}
+            {description && <p className="mt-1 text-sm text-neutral-300">{description}</p>}
           </div>
           <button className="icon-btn -mt-1 -mr-2" onClick={onClose} aria-label="Fechar">
             <X className="size-5" />

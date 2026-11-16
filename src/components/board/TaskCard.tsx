@@ -44,9 +44,9 @@ export const TaskCard = forwardRef<HTMLDivElement, Props>(function TaskCard(
       className={cn(
         "glass-card group relative cursor-pointer touch-manipulation overflow-hidden rounded-2xl text-left transition duration-150 outline-none select-none",
         "hover:-translate-y-0.5 hover:border-white/[0.16] hover:shadow-[0_14px_30px_-14px_rgba(0,0,0,0.8)]",
-        "focus-visible:ring-2 focus-visible:ring-cyan-300/70",
+        "focus-visible:ring-2 focus-visible:ring-brand-300/70",
         dragging && "opacity-35",
-        overlay && "rotate-[2deg] cursor-grabbing border-white/20 shadow-[0_24px_50px_-14px_rgba(70,60,200,0.65)]",
+        overlay && "rotate-[2deg] cursor-grabbing border-white/20 shadow-[0_24px_50px_-14px_rgba(217,119,87,0.35)]",
         task.archived && "opacity-70",
         className,
       )}
@@ -71,33 +71,33 @@ export const TaskCard = forwardRef<HTMLDivElement, Props>(function TaskCard(
         )}
 
         <div>
-          <p className={cn("text-[14px] leading-snug font-semibold", isDone ? "text-slate-300" : "text-white")}>
+          <p className={cn("text-[14px] leading-snug font-semibold", isDone ? "text-neutral-300" : "text-white")}>
             {isDone && <CheckCircle2 className="mr-1 -mt-0.5 inline size-4 text-emerald-300" aria-hidden />}
             {task.title}
           </p>
-          {task.description && <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-slate-400">{task.description}</p>}
+          {task.description && <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-neutral-400">{task.description}</p>}
         </div>
 
         {checkTotal > 0 && (
           <div className="flex items-center gap-2">
             <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.08]">
               <div
-                className={cn("h-full rounded-full", checkDone === checkTotal ? "bg-emerald-400" : "bg-gradient-to-r from-electric-400 to-violet-400")}
+                className={cn("h-full rounded-full", checkDone === checkTotal ? "bg-emerald-400" : "bg-gradient-to-r from-brand-400 to-brand-400")}
                 style={{ width: `${(checkDone / checkTotal) * 100}%` }}
               />
             </div>
           </div>
         )}
 
-        <div className="flex items-center gap-2 text-xs text-slate-300">
+        <div className="flex items-center gap-2 text-xs text-neutral-300">
           <span className={cn("chip px-1.5 py-[1px] text-[11px]", pStyle.chip)}>{priorityName[task.priority]}</span>
           {task.dueDate && (
             <span
               className={cn(
-                "inline-flex items-center gap-1 rounded-md px-1.5 py-[1px] text-[11px] font-semibold",
+                "inline-flex items-center gap-1 rounded-md px-1.5 py-[1px] text-[11px] font-semibold whitespace-nowrap",
                 ds === "overdue" && "bg-rose-500/20 text-rose-200",
                 ds === "soon" && "bg-amber-500/15 text-amber-200",
-                ds === "later" && "text-slate-300",
+                ds === "later" && "text-neutral-300",
                 ds === "done" && "bg-emerald-500/15 text-emerald-200",
               )}
             >

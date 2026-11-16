@@ -116,7 +116,7 @@ export const priorityStyle: Record<Priority, { chip: string; dot: string; hex: s
   urgente: { chip: "bg-rose-500/15 text-rose-200 ring-rose-400/30", dot: "bg-rose-400", hex: "#fb7185" },
   alta: { chip: "bg-amber-500/15 text-amber-200 ring-amber-400/30", dot: "bg-amber-400", hex: "#fbbf24" },
   media: { chip: "bg-sky-500/15 text-sky-200 ring-sky-400/30", dot: "bg-sky-400", hex: "#38bdf8" },
-  baixa: { chip: "bg-slate-400/15 text-slate-200 ring-slate-300/25", dot: "bg-slate-400", hex: "#94a3b8" },
+  baixa: { chip: "bg-neutral-400/15 text-neutral-200 ring-neutral-300/25", dot: "bg-neutral-400", hex: "#94a3b8" },
 };
 
 export const labelStyle: Record<LabelColor, { chip: string; bar: string; hex: string }> = {
@@ -132,6 +132,7 @@ export const labelStyle: Record<LabelColor, { chip: string; bar: string; hex: st
 export const LABEL_COLORS: LabelColor[] = ["violet", "blue", "cyan", "amber", "green", "pink", "red"];
 
 export const accentStyle: Record<BoardAccent, { from: string; to: string; text: string; hex: string }> = {
+  orange: { from: "#d97757", to: "#9e4c30", text: "text-brand-300", hex: "#e58a68" },
   violet: { from: "#8b5cf6", to: "#4f46e5", text: "text-violet-300", hex: "#a78bfa" },
   blue: { from: "#3b82f6", to: "#1d4ed8", text: "text-blue-300", hex: "#60a5fa" },
   cyan: { from: "#22d3ee", to: "#2563eb", text: "text-cyan-300", hex: "#22d3ee" },
@@ -140,7 +141,7 @@ export const accentStyle: Record<BoardAccent, { from: string; to: string; text: 
   green: { from: "#10b981", to: "#0ea5e9", text: "text-emerald-300", hex: "#34d399" },
 };
 
-export const BOARD_ACCENTS: BoardAccent[] = ["violet", "blue", "cyan", "pink", "amber", "green"];
+export const BOARD_ACCENTS: BoardAccent[] = ["orange", "violet", "blue", "cyan", "pink", "amber", "green"];
 
 export function greeting(d = new Date()) {
   const h = d.getHours();

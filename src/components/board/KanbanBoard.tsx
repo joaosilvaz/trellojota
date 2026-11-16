@@ -235,7 +235,7 @@ export function KanbanBoard({ boardId, filters, sort }: { boardId: string; filte
         ) : activeColumn ? (
           <div className="glass-col w-[300px] rotate-1 rounded-3xl p-4 opacity-90">
             <p className="font-display font-semibold text-white">{activeColumn.title}</p>
-            <p className="text-xs text-slate-400">{activeColumn.taskIds.length} tarefas</p>
+            <p className="text-xs text-neutral-400">{activeColumn.taskIds.length} tarefas</p>
           </div>
         ) : null}
       </DragOverlay>
@@ -300,7 +300,7 @@ function KanbanColumn({
           ref={setActivatorNodeRef}
           {...attributes}
           {...listeners}
-          className="grid size-8 shrink-0 cursor-grab place-items-center rounded-lg text-slate-500 hover:bg-white/[0.06] hover:text-slate-200 active:cursor-grabbing"
+          className="grid size-8 shrink-0 cursor-grab place-items-center rounded-lg text-neutral-500 hover:bg-white/[0.06] hover:text-neutral-200 active:cursor-grabbing"
           aria-label={`Reordenar coluna ${column.title}`}
           aria-roledescription="coluna arrastável"
         >
@@ -336,7 +336,7 @@ function KanbanColumn({
           </button>
         )}
         {column.isDone && <CheckCircle2 className="size-4 shrink-0 text-emerald-300" aria-label="Coluna de conclusão" />}
-        <span className="rounded-full bg-white/[0.08] px-2 py-0.5 text-xs font-semibold text-slate-300">{taskIds.length}</span>
+        <span className="rounded-full bg-white/[0.08] px-2 py-0.5 text-xs font-semibold text-neutral-300">{taskIds.length}</span>
         <button className="icon-btn size-8" onClick={() => setAdding(true)} aria-label={`Adicionar tarefa em ${column.title}`}>
           <Plus className="size-4" />
         </button>
@@ -393,7 +393,7 @@ function KanbanColumn({
           </ul>
         </SortableContext>
         {taskIds.length === 0 && !adding && (
-          <div className="rounded-2xl border border-dashed border-white/10 px-3 py-6 text-center text-[13px] text-slate-400">
+          <div className="rounded-2xl border border-dashed border-white/10 px-3 py-6 text-center text-[13px] text-neutral-400">
             {hiddenCount > 0 ? `${hiddenCount} tarefa(s) ocultas pelos filtros` : "Solte cartões aqui ou crie uma tarefa"}
           </div>
         )}
@@ -403,7 +403,7 @@ function KanbanColumn({
       {!adding && (
         <div className="px-3 pb-3">
           <button
-            className="flex h-10 w-full items-center gap-2 rounded-xl px-3 text-sm font-semibold text-slate-400 transition hover:bg-white/[0.06] hover:text-white"
+            className="flex h-10 w-full items-center gap-2 rounded-xl px-3 text-sm font-semibold text-neutral-400 transition hover:bg-white/[0.06] hover:text-white"
             onClick={() => setAdding(true)}
           >
             <Plus className="size-4" /> Adicionar tarefa
@@ -482,7 +482,7 @@ function QuickAdd({ column, onDone }: { column: Column; onDone: () => void }) {
         id={`qa-${column.id}`}
         autoFocus
         rows={2}
-        className="w-full resize-none bg-transparent px-1 text-sm text-white outline-none placeholder:text-slate-400"
+        className="w-full resize-none bg-transparent px-1 text-sm text-white outline-none placeholder:text-neutral-400"
         placeholder="O que precisa ser feito?"
         value={value}
         onChange={(e) => {
@@ -508,7 +508,7 @@ function QuickAdd({ column, onDone }: { column: Column; onDone: () => void }) {
         <button className="icon-btn size-8" onClick={onDone} aria-label="Cancelar">
           <X className="size-4" />
         </button>
-        <span className="ml-auto text-[11px] text-slate-500">Enter para salvar</span>
+        <span className="ml-auto text-[11px] text-neutral-500">Enter para salvar</span>
       </div>
     </div>
   );
@@ -536,7 +536,7 @@ function AddColumn({ boardId }: { boardId: string }) {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="flex h-14 w-[85vw] shrink-0 snap-start items-center justify-center gap-2 rounded-3xl border border-dashed border-white/15 text-sm font-semibold text-slate-300 transition hover:border-white/30 hover:bg-white/[0.04] hover:text-white sm:w-[280px]"
+        className="flex h-14 w-[85vw] shrink-0 snap-start items-center justify-center gap-2 rounded-3xl border border-dashed border-white/15 text-sm font-semibold text-neutral-300 transition hover:border-white/30 hover:bg-white/[0.04] hover:text-white sm:w-[280px]"
       >
         <Plus className="size-4" /> Nova coluna
       </button>

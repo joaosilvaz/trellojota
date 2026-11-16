@@ -99,7 +99,7 @@ export function BoardHeader({
     <div className="px-4 pt-6 sm:px-6 lg:px-8">
       <div className="flex flex-wrap items-start gap-4">
         <span
-          className="grid size-12 shrink-0 place-items-center rounded-2xl shadow-[0_10px_30px_-10px_rgba(110,90,255,0.8)]"
+          className="grid size-12 shrink-0 place-items-center rounded-2xl shadow-[0_10px_30px_-10px_rgba(217,119,87,0.6)]"
           style={{ background: `linear-gradient(135deg, ${acc.from}, ${acc.to})` }}
           aria-hidden
         >
@@ -169,7 +169,7 @@ export function BoardHeader({
                     Gerenciar membros
                   </MenuItem>
                   <div className="px-3 py-2">
-                    <p className="mb-2 text-xs font-semibold text-slate-400">Cor do quadro</p>
+                    <p className="mb-2 text-xs font-semibold text-neutral-400">Cor do quadro</p>
                     <div className="flex gap-1.5">
                       {BOARD_ACCENTS.map((a) => (
                         <button
@@ -222,17 +222,17 @@ export function BoardHeader({
             </div>
           ) : (
             <button
-              className="mt-1 max-w-2xl rounded-lg px-1 -mx-1 text-left text-[15px] text-slate-300 hover:bg-white/[0.04]"
+              className="mt-1 max-w-2xl rounded-lg px-1 -mx-1 text-left text-[15px] text-neutral-300 hover:bg-white/[0.04]"
               onClick={() => {
                 setDesc(board.description);
                 setEditingDesc(true);
               }}
             >
-              {board.description || <span className="text-slate-500">Adicionar descrição…</span>}
+              {board.description || <span className="text-neutral-500">Adicionar descrição…</span>}
             </button>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex w-full items-center justify-between gap-2 sm:w-auto">
           <button onClick={() => setMembersOpen(true)} className="rounded-full p-1 transition hover:bg-white/[0.06]" aria-label="Membros do quadro">
             <AvatarStack members={board.memberIds.map((m) => state.members[m])} max={4} size="md" />
           </button>
@@ -253,7 +253,7 @@ export function BoardHeader({
               onClick={() => onView(v.id)}
               className={cn(
                 "flex h-8 items-center gap-2 rounded-lg px-3 text-[13px] font-semibold transition",
-                view === v.id ? "bg-gradient-to-r from-electric-500/40 to-violet-500/30 text-white shadow-inner" : "text-slate-400 hover:text-white",
+                view === v.id ? "bg-gradient-to-r from-brand-500/40 to-brand-600/30 text-white shadow-inner" : "text-neutral-400 hover:text-white",
               )}
             >
               <v.icon className="size-4" />
@@ -263,7 +263,7 @@ export function BoardHeader({
         </div>
 
         <div className="relative order-last w-full sm:order-none sm:w-60">
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" aria-hidden />
+          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-neutral-400" aria-hidden />
           <input
             className="field h-10 pl-9"
             placeholder="Buscar neste quadro"
@@ -275,9 +275,9 @@ export function BoardHeader({
 
         <Popover
           trigger={(p) => (
-            <button {...p} onClick={p.toggle} className={cn("btn-secondary h-10", filterCount > 0 && "border-electric-400/50 bg-electric-500/15")}>
+            <button {...p} onClick={p.toggle} className={cn("btn-secondary h-10", filterCount > 0 && "border-brand-400/50 bg-brand-500/15")}>
               <Filter className="size-4" /> Filtros
-              {filterCount > 0 && <span className="rounded-full bg-electric-500 px-1.5 text-[11px] text-white">{filterCount}</span>}
+              {filterCount > 0 && <span className="rounded-full bg-brand-500 px-1.5 text-[11px] text-white">{filterCount}</span>}
             </button>
           )}
           panelClassName="w-[min(20rem,calc(100vw-2rem))] p-3"
@@ -296,7 +296,7 @@ export function BoardHeader({
                       onClick={() => onFilters({ ...filters, assigneeIds: toggle(filters.assigneeIds, id) })}
                       className={cn(
                         "flex h-8 items-center gap-1.5 rounded-full border pr-2.5 pl-1 text-xs font-semibold transition",
-                        on ? "border-electric-400/60 bg-electric-500/20 text-white" : "border-white/10 text-slate-300 hover:border-white/25",
+                        on ? "border-brand-400/60 bg-brand-500/20 text-white" : "border-white/10 text-neutral-300 hover:border-white/25",
                       )}
                     >
                       <Avatar member={m} size="xs" title={false} />
@@ -316,7 +316,7 @@ export function BoardHeader({
                       key={l.id}
                       aria-pressed={on}
                       onClick={() => onFilters({ ...filters, labelIds: toggle(filters.labelIds, l.id) })}
-                      className={cn("chip px-2.5 py-1 transition", on ? labelStyle[l.color].chip : "text-slate-400 ring-white/10 hover:text-white")}
+                      className={cn("chip px-2.5 py-1 transition", on ? labelStyle[l.color].chip : "text-neutral-400 ring-white/10 hover:text-white")}
                     >
                       {on && <Check className="size-3" />}
                       {l.name}
@@ -335,7 +335,7 @@ export function BoardHeader({
                       key={p.id}
                       aria-pressed={on}
                       onClick={() => onFilters({ ...filters, priorities: toggle(filters.priorities, p.id as Priority) })}
-                      className={cn("chip px-2.5 py-1 transition", on ? priorityStyle[p.id].chip : "text-slate-400 ring-white/10 hover:text-white")}
+                      className={cn("chip px-2.5 py-1 transition", on ? priorityStyle[p.id].chip : "text-neutral-400 ring-white/10 hover:text-white")}
                     >
                       {on && <Check className="size-3" />}
                       {p.name}
@@ -344,13 +344,13 @@ export function BoardHeader({
                 })}
               </div>
             </div>
-            <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2.5 text-sm text-slate-200">
+            <label className="flex cursor-pointer items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2.5 text-sm text-neutral-200">
               <span>
-                Ver arquivadas <span className="text-slate-400">({archivedCount})</span>
+                Ver arquivadas <span className="text-neutral-400">({archivedCount})</span>
               </span>
               <input
                 type="checkbox"
-                className="size-4 accent-violet-500"
+                className="size-4 accent-brand-600"
                 checked={filters.showArchived}
                 onChange={(e) => onFilters({ ...filters, showArchived: e.target.checked })}
               />
@@ -363,7 +363,7 @@ export function BoardHeader({
 
         <Popover
           trigger={(p) => (
-            <button {...p} onClick={p.toggle} className={cn("btn-secondary h-10", sort !== "manual" && "border-electric-400/50 bg-electric-500/15")}>
+            <button {...p} onClick={p.toggle} className={cn("btn-secondary h-10", sort !== "manual" && "border-brand-400/50 bg-brand-500/15")}>
               <ArrowUpDown className="size-4" />
               <span className="hidden md:inline">{SORTS.find((s) => s.id === sort)?.name}</span>
             </button>
@@ -393,7 +393,7 @@ export function BoardHeader({
         )}
 
         <button
-          className={cn("btn-secondary ml-auto hidden h-10 xl:inline-flex", panelOpen && "border-cyan-300/40 bg-cyan-400/10")}
+          className={cn("btn-secondary ml-auto hidden h-10 xl:inline-flex", panelOpen && "border-brand-300/40 bg-brand-400/10")}
           onClick={onTogglePanel}
           aria-pressed={panelOpen}
         >
@@ -430,12 +430,12 @@ export function BoardHeader({
                   <Avatar member={m} size="md" />
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold text-white">
-                      {m.name} {isMe && <span className="text-xs text-cyan-200">(você)</span>}
+                      {m.name} {isMe && <span className="text-xs text-brand-200">(você)</span>}
                     </span>
-                    <span className="block text-xs text-slate-400">{m.role}</span>
+                    <span className="block text-xs text-neutral-400">{m.role}</span>
                   </span>
                   <span
-                    className={cn("grid size-6 place-items-center rounded-md border", on ? "border-violet-400 bg-violet-500 text-white" : "border-white/20")}
+                    className={cn("grid size-6 place-items-center rounded-md border", on ? "border-brand-400 bg-brand-600 text-white" : "border-white/20")}
                     aria-hidden
                   >
                     {on && <Check className="size-4" />}

@@ -105,13 +105,13 @@ export function MenuItem({
       onClick={onClick}
       className={cn(
         "flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm transition",
-        danger ? "text-rose-200 hover:bg-rose-500/15" : "text-slate-200 hover:bg-white/[0.08] hover:text-white",
+        danger ? "text-rose-200 hover:bg-rose-500/15" : "text-neutral-200 hover:bg-white/[0.08] hover:text-white",
         active && "bg-white/[0.08] text-white",
       )}
     >
-      {Icon && <Icon className={cn("size-4 shrink-0", danger ? "text-rose-300" : "text-slate-400")} />}
+      {Icon && <Icon className={cn("size-4 shrink-0", danger ? "text-rose-300" : "text-neutral-400")} />}
       <span className="flex-1">{children}</span>
-      {shortcut && <kbd className="text-[11px] text-slate-500">{shortcut}</kbd>}
+      {shortcut && <kbd className="text-[11px] text-neutral-500">{shortcut}</kbd>}
     </button>
   );
 }

@@ -21,7 +21,7 @@ export function CreateBoardModal() {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [accent, setAccent] = useState<BoardAccent>("violet");
+  const [accent, setAccent] = useState<BoardAccent>("orange");
   const [template, setTemplate] = useState("jota");
   const [error, setError] = useState("");
 
@@ -29,7 +29,7 @@ export function CreateBoardModal() {
     if (createBoardOpen) {
       setTitle("");
       setDescription("");
-      setAccent("violet");
+      setAccent("orange");
       setTemplate("jota");
       setError("");
     }
@@ -78,7 +78,7 @@ export function CreateBoardModal() {
     >
       <form onSubmit={submit} className="space-y-5" noValidate>
         <div>
-          <label htmlFor="board-title" className="mb-1.5 block text-sm font-semibold text-slate-200">
+          <label htmlFor="board-title" className="mb-1.5 block text-sm font-semibold text-neutral-200">
             Nome do quadro
           </label>
           <input
@@ -102,8 +102,8 @@ export function CreateBoardModal() {
           )}
         </div>
         <div>
-          <label htmlFor="board-desc" className="mb-1.5 block text-sm font-semibold text-slate-200">
-            Descrição <span className="font-normal text-slate-400">(opcional)</span>
+          <label htmlFor="board-desc" className="mb-1.5 block text-sm font-semibold text-neutral-200">
+            Descrição <span className="font-normal text-neutral-400">(opcional)</span>
           </label>
           <textarea
             id="board-desc"
@@ -114,7 +114,7 @@ export function CreateBoardModal() {
           />
         </div>
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold text-slate-200">Cor de destaque</legend>
+          <legend className="mb-2 text-sm font-semibold text-neutral-200">Cor de destaque</legend>
           <div className="flex flex-wrap gap-2">
             {BOARD_ACCENTS.map((a) => (
               <button
@@ -132,7 +132,7 @@ export function CreateBoardModal() {
           </div>
         </fieldset>
         <fieldset>
-          <legend className="mb-2 text-sm font-semibold text-slate-200">Modelo de colunas</legend>
+          <legend className="mb-2 text-sm font-semibold text-neutral-200">Modelo de colunas</legend>
           <div className="grid gap-2 sm:grid-cols-3">
             {TEMPLATES.map((tp) => (
               <button
@@ -142,11 +142,11 @@ export function CreateBoardModal() {
                 aria-pressed={template === tp.id}
                 className={cn(
                   "rounded-2xl border p-3 text-left transition",
-                  template === tp.id ? "border-electric-400/70 bg-electric-500/15" : "border-white/10 bg-white/[0.03] hover:border-white/20",
+                  template === tp.id ? "border-brand-400/70 bg-brand-500/15" : "border-white/10 bg-white/[0.03] hover:border-white/20",
                 )}
               >
                 <p className="text-sm font-semibold text-white">{tp.name}</p>
-                <p className="mt-1 text-xs leading-snug text-slate-400">{tp.columns.join(" · ")}</p>
+                <p className="mt-1 text-xs leading-snug text-neutral-400">{tp.columns.join(" · ")}</p>
               </button>
             ))}
           </div>

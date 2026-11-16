@@ -30,7 +30,7 @@ export default function ActivityPage() {
     <div className="animate-fade-in mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <header className="mb-6">
         <h1 className="font-display text-3xl font-semibold tracking-tight text-white">Atividade</h1>
-        <p className="mt-1 text-[15px] text-slate-300">Tudo o que a equipe criou, moveu, comentou e concluiu.</p>
+        <p className="mt-1 text-[15px] text-neutral-300">Tudo o que a equipe criou, moveu, comentou e concluiu.</p>
       </header>
 
       <div className="mb-6 grid gap-3 sm:grid-cols-2">
@@ -55,7 +55,7 @@ export default function ActivityPage() {
                 key={m.id}
                 aria-pressed={memberId === m.id}
                 onClick={() => setMemberId(memberId === m.id ? "" : m.id)}
-                className={cn("rounded-full p-0.5 ring-2 transition", memberId === m.id ? "ring-cyan-300" : "ring-transparent opacity-70 hover:opacity-100")}
+                className={cn("rounded-full p-0.5 ring-2 transition", memberId === m.id ? "ring-brand-300" : "ring-transparent opacity-70 hover:opacity-100")}
                 aria-label={`Filtrar por ${m.name}`}
               >
                 <Avatar member={m} size="md" />
@@ -73,7 +73,7 @@ export default function ActivityPage() {
         <div className="space-y-6">
           {groups.map(([day, items]) => (
             <section key={day} className="glass rounded-3xl p-5 sm:p-6">
-              <h2 className="font-display mb-4 text-sm font-semibold text-slate-300 first-letter:uppercase">{dayTitle(day)}</h2>
+              <h2 className="font-display mb-4 text-sm font-semibold text-neutral-300 first-letter:uppercase">{dayTitle(day)}</h2>
               <ul className="space-y-4">
                 {items.map((a) => (
                   <ActivityItem key={a.id} a={a} />

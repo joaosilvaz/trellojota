@@ -78,7 +78,7 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[60] lg:hidden">
-      <div className="animate-fade-in absolute inset-0 bg-[#03030f]/70 backdrop-blur-sm" onClick={onClose} aria-hidden />
+      <div className="animate-fade-in absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-hidden />
       <div
         ref={ref}
         role="dialog"
@@ -112,13 +112,13 @@ function BottomNav() {
             aria-current={active ? "page" : undefined}
             className={cn(
               "flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-1.5 text-[11px] font-semibold transition",
-              active ? "text-white" : "text-slate-400",
+              active ? "text-white" : "text-neutral-400",
             )}
           >
-            <span className={cn("grid h-7 w-12 place-items-center rounded-full transition", active && "bg-gradient-to-r from-electric-500/40 to-violet-500/30")}>
-              <item.icon className={cn("size-[18px]", active && "text-cyan-200")} />
+            <span className={cn("grid h-7 w-12 place-items-center rounded-full transition", active && "bg-gradient-to-r from-brand-500/40 to-brand-600/30")}>
+              <item.icon className={cn("size-[18px]", active && "text-brand-200")} />
             </span>
-            {item.label.replace("Meus ", "")}
+            {item.short}
           </Link>
         );
       })}
